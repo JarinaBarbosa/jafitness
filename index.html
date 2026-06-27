@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JAFITNESS</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Fonte -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+  <!-- 🛒 CARRINHO FIXO -->
+  <div class="cart">
+    🛒 <span id="cart-count">0</span>
+    <button onclick="abrirCarrinho()">Ver carrinho</button>
+  </div>
+
+  <!-- BOTÃO ADMIN -->
+  <button class="admin-btn" onclick="abrirLogin()">Admin</button>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo-area">
+      <img src="img/logo.png" class="logo" alt="Logo">
+      <div>
+        <h1>JARINA FITNESS</h1>
+        <p>Moda fitness para treinar com estilo</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- BANNER -->
+  <section class="banner">
+    <h2>Vista sua melhor versão</h2>
+  </section>
+
+  <!-- PAINEL ADMIN -->
+  <section class="admin">
+
+    <h2 class="admin-title">
+      Cadastro de Produtos
+      <button class="btn-fechar-texto" onclick="fecharAdmin()">fechar</button>
+    </h2>
+
+    <input type="text" id="nome" placeholder="Nome do produto">
+    <input type="text" id="desc" placeholder="Descrição do produto">
+    <input type="text" id="preco" placeholder="Preço (ex: R$ 79,90)">
+    <input type="text" id="img" placeholder="Imagem (ex: img/leg.jpg)">
+
+    <select id="cat">
+      <option value="">Selecione a categoria</option>
+      <option value="macacao-curto">Macacão Curto</option>
+      <option value="top">Top</option>
+      <option value="conjunto">Conjunto</option>
+      <option value="macacao-duplo">Macacão Duplo</option>
+      <option value="macacao-longo">Macacão Longo</option>
+      <option value="legging">Legging Fitness</option>
+    </select>
+
+    <button onclick="adicionarProduto()">Adicionar Produto</button>
+  </section>
+
+  <!-- FILTROS -->
+  <div class="filtros">
+    <button onclick="filtrar('todos')">Todos</button>
+    <button onclick="filtrar('macacao-curto')">Macacão Curto</button>
+    <button onclick="filtrar('top')">Top</button>
+    <button onclick="filtrar('conjunto')">Conjunto</button>
+    <button onclick="filtrar('macacao-duplo')">Macacão Duplo</button>
+    <button onclick="filtrar('macacao-longo')">Macacão Longo</button>
+    <button onclick="filtrar('legging')">Legging Fitness</button>
+  </div>
+
+  <!-- PRODUTOS -->
+  <section class="produtos" id="produtos"></section>
+
+  <!-- SOBRE -->
+  <section class="sobre">
+    <h2>Sobre nós</h2>
+    <p>Moda fitness feita para quem busca conforto, estilo e confiança no treino.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+
+  <a href="https://wa.me/85985713477" target="_blank">WhatsApp</a>
+
+  <a href="https://www.instagram.com/jarinafitness" target="_blank">
+    <i class="fa-brands fa-instagram"></i> Instagram
+  </a>
+
+  <!-- CRÉDITOS -->
+  <hr style="margin:20px auto; width:80%; border:0; border-top:1px solid rgba(255,255,255,.2);">
+
+  <p class="creditos">
+    Desenvolvido por <strong>Flávio Sousa</strong><br>
+    <span>FJ Informática © 2026</span>
+  </p>
+
+</footer>
+
+  <!-- WHATSAPP FLUTUANTE -->
+  <a class="whatsapp-float" href="https://wa.me/85985713477" target="_blank">
+    WhatsApp
+  </a>
+
+  <!-- 🛒 CARRINHO MODAL (NOVA TELA) -->
+  <div id="cart-modal" class="cart-modal">
+
+    <div class="cart-box">
+
+      <h2>Seu Carrinho</h2>
+
+      <div id="cart-items"></div>
+
+      <p id="cart-total"></p>
+
+      <button onclick="finalizarCompra()" class="btn-finalizar">
+        Finalizar no WhatsApp
+      </button>
+
+      <button onclick="fecharCarrinho()" class="btn-fechar">
+        Fechar
+      </button>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
