@@ -2,11 +2,11 @@
 // PRODUTOS
 // =========================
 
-let produtos = JSON.parse(localStorage.getItem("produtos")) || [
+let produtos = [
   { nome: "Legging Fitness", preco: "R$ 79,90", img: "img/Legging.jpg", cat: "legging" },
   { nome: "Top Fitness", preco: "R$ 25,00", img: "img/top.jpg", cat: "top" },
-  { nome: "Conjunto Fitness", preco: "R$ 119,90", img: "img/conjunto.jpg", cat: "conjunto" },
-  { nome: "Macacão Longo Fitness", preco: "R$ 139,90", img: "img/macacao-longo.jpg", cat: "macacao-longo" }
+  { nome: "Conjunto Fitness", preco: "R$ 50,00", img: "img/conjunto.jpg", cat: "conjunto" },
+  { nome: "Macacão Longo Fitness", preco: "R$ 65,00", img: "img/macacao-longo.jpg", cat: "macacao-longo" }
 ];
 
 function salvar() {
