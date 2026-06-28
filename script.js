@@ -7,7 +7,7 @@ let produtos = [
   { nome: "Top Fitness", preco: "R$ 25,00", img: "img/top.jpg", cat: "top" },
   { nome: "Conjunto Fitness", preco: "R$ 50,00", img: "img/conjunto.jpg", cat: "conjunto" },
   { nome: "Macacão Longo Fitness", preco: "R$ 65,00", img: "img/macacao-longo.jpg", cat: "macacao-longo" },
-  { nome: "Macacão Curto Fitness", preco: "R$ 89,90", img: "img/macacao-curto.jpg", cat: "macacao-curto" }
+  { nome: "Macacão Curto Fitness", preco: "R$ 55,00", img: "img/macacao-curto.jpg", cat: "macacao-curto" }
 ];
 
 function salvar() {
