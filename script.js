@@ -18,7 +18,6 @@ function salvar() {
 // CARRINHO
 // =========================
 
-// {nome, preco, img, cat, qtd}
 let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
 
 function salvarCarrinho() {
@@ -32,7 +31,7 @@ function atualizarCarrinho() {
 }
 
 // =========================
-// ADICIONAR AO CARRINHO
+// CARRINHO - ADICIONAR
 // =========================
 
 function adicionarCarrinho(index) {
@@ -40,11 +39,8 @@ function adicionarCarrinho(index) {
 
   let item = carrinho.find(p => p.nome === produto.nome);
 
-  if (item) {
-    item.qtd++;
-  } else {
-    carrinho.push({ ...produto, qtd: 1 });
-  }
+  if (item) item.qtd++;
+  else carrinho.push({ ...produto, qtd: 1 });
 
   salvarCarrinho();
   alert("Produto adicionado 🛒");
@@ -89,14 +85,7 @@ function abrirCarrinho() {
         </div>
 
         <button onclick="removerItemCarrinho(${index})"
-        style="
-          background:#e11d48;
-          color:white;
-          border:none;
-          padding:5px 8px;
-          border-radius:6px;
-          cursor:pointer;
-        ">
+        style="background:#e11d48;color:white;border:none;padding:5px 8px;border-radius:6px;">
           ❌
         </button>
 
@@ -110,29 +99,12 @@ function abrirCarrinho() {
     <br><br>
 
     <button onclick="fecharCarrinho()"
-    style="
-      background:#555;
-      color:white;
-      border:none;
-      padding:10px;
-      border-radius:8px;
-      cursor:pointer;
-      width:100%;
-      margin-bottom:8px;
-    ">
+    style="background:#555;color:white;border:none;padding:10px;border-radius:8px;width:100%;margin-bottom:8px;">
       👈 Continuar comprando
     </button>
 
     <button onclick="limparCarrinho()"
-    style="
-      background:#111;
-      color:white;
-      border:none;
-      padding:10px;
-      border-radius:8px;
-      cursor:pointer;
-      width:100%;
-    ">
+    style="background:#111;color:white;border:none;padding:10px;border-radius:8px;width:100%;">
       🗑️ Limpar carrinho
     </button>
   `;
@@ -148,43 +120,34 @@ function fecharCarrinho() {
 // QUANTIDADE
 // =========================
 
-function aumentarQtd(index) {
-  carrinho[index].qtd++;
+function aumentarQtd(i) {
+  carrinho[i].qtd++;
   salvarCarrinho();
   abrirCarrinho();
 }
 
-function diminuirQtd(index) {
-  carrinho[index].qtd--;
-
-  if (carrinho[index].qtd <= 0) {
-    carrinho.splice(index, 1);
-  }
-
+function diminuirQtd(i) {
+  carrinho[i].qtd--;
+  if (carrinho[i].qtd <= 0) carrinho.splice(i, 1);
   salvarCarrinho();
   abrirCarrinho();
 }
 
-// =========================
-// REMOVER / LIMPAR
-// =========================
-
-function removerItemCarrinho(index) {
-  carrinho.splice(index, 1);
+function removerItemCarrinho(i) {
+  carrinho.splice(i, 1);
   salvarCarrinho();
   abrirCarrinho();
 }
 
 function limparCarrinho() {
   if (!confirm("Deseja limpar o carrinho?")) return;
-
   carrinho = [];
   salvarCarrinho();
   abrirCarrinho();
 }
 
 // =========================
-// FINALIZAR COMPRA (WHATSAPP - ÚNICO BOTÃO)
+// FINALIZAR COMPRA
 // =========================
 
 function finalizarCompra() {
@@ -192,7 +155,6 @@ function finalizarCompra() {
   let total = 0;
 
   carrinho.forEach(p => {
-
     let preco = parseFloat(
       p.preco.replace("R$", "").replace(".", "").replace(",", ".")
     );
@@ -200,18 +162,16 @@ function finalizarCompra() {
     let subtotal = preco * p.qtd;
 
     mensagem += `- ${p.nome} x${p.qtd} = R$ ${subtotal.toFixed(2)}%0A`;
-
     total += subtotal;
   });
 
   mensagem += `%0A💰 Total: R$ ${total.toFixed(2)}`;
 
-  const url = `https://wa.me/5585985713477?text=${mensagem}`;
-  window.open(url, "_blank");
+  window.open(`https://wa.me/5585985713477?text=${mensagem}`, "_blank");
 }
 
 // =========================
-// RENDER PRODUTOS
+// RENDER (SEM ALTERAR BOTÕES)
 // =========================
 
 function render(lista) {
@@ -231,16 +191,7 @@ function render(lista) {
         <p class="produto-preco">${p.preco}</p>
 
         <button onclick="adicionarCarrinho(${index})"
-        style="
-          background:#111;
-          color:white;
-          border:none;
-          padding:10px;
-          border-radius:8px;
-          cursor:pointer;
-          width:100%;
-          margin-top:8px;
-        ">
+        style="background:#111;color:white;border:none;padding:10px;border-radius:8px;width:100%;margin-top:8px;">
           🛒 Adicionar ao carrinho
         </button>
 
@@ -250,18 +201,9 @@ function render(lista) {
           Comprar direto
         </a>
 
-        <div class="admin-controls" style="margin-top:10px; display:none;">
-          
-          <button onclick="editarProduto(${index})"
-          style="background:#2563eb;color:white;border:none;padding:6px;border-radius:6px;width:48%;">
-            Editar
-          </button>
-
-          <button onclick="excluirProduto(${index})"
-          style="background:#e11d48;color:white;border:none;padding:6px;border-radius:6px;width:48%;">
-            Excluir
-          </button>
-
+        <div class="admin-controls" style="margin-top:10px;display:none;">
+          <button onclick="editarProduto(${index})">Editar</button>
+          <button onclick="excluirProduto(${index})">Excluir</button>
         </div>
 
       </div>
@@ -272,7 +214,7 @@ function render(lista) {
 }
 
 // =========================
-// ADMIN
+// ADMIN LOGIN
 // =========================
 
 function abrirLogin() {
@@ -315,21 +257,21 @@ function adicionarProduto() {
   render(produtos);
 }
 
-function excluirProduto(index) {
-  produtos.splice(index, 1);
+function excluirProduto(i) {
+  produtos.splice(i, 1);
   salvar();
   render(produtos);
 }
 
-function editarProduto(index) {
-  const p = produtos[index];
+function editarProduto(i) {
+  const p = produtos[i];
 
   const nome = prompt("Nome:", p.nome);
   const preco = prompt("Preço:", p.preco);
   const img = prompt("Imagem:", p.img);
 
   if (nome && preco && img) {
-    produtos[index] = { ...p, nome, preco, img };
+    produtos[i] = { ...p, nome, preco, img };
     salvar();
     render(produtos);
   }
@@ -351,3 +293,39 @@ function filtrar(cat) {
 render(produtos);
 atualizarCarrinho();
 
+// =========================
+// ADMIN OCULTO (5 CLIQUES NA LOGO - SEGURO)
+// =========================
+
+function initAdminSecreto() {
+
+  const logo = document.getElementById("logoAdmin");
+  if (!logo) return;
+
+  let cliques = 0;
+  let timer;
+
+  logo.addEventListener("click", () => {
+
+    cliques++;
+
+    clearTimeout(timer);
+
+    timer = setTimeout(() => {
+      cliques = 0;
+    }, 1500);
+
+    if (cliques >= 5) {
+      cliques = 0;
+      abrirLogin();
+    }
+
+  });
+
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initAdminSecreto);
+} else {
+  initAdminSecreto();
+}
