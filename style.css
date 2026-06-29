@@ -407,3 +407,9 @@ body {
     display: none;
   }
 }
+@media (max-width: 600px) {
+  .cart {
+    top: 90px; /* desce o carrinho para não encostar na logo */
+    left: 10px;
+  }
+}
